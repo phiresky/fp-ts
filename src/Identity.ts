@@ -91,7 +91,7 @@ export const chain = <A, B>(f: (a: A) => Identity<B>, fa: Identity<A>): Identity
 
 export const reduce = <A, B>(f: (b: B, a: A) => B, b: B, fa: Identity<A>): B => fa.reduce(f, b)
 
-export const alt = <A>(fx: Identity<A>) => (fy: Identity<A>): Identity<A> => {
+export const alt = <A>(fx: Identity<A>, fy: Identity<A>): Identity<A> => {
   return fx.alt(fy)
 }
 
@@ -107,7 +107,7 @@ export class Ops {
   traverse<F extends HKTS>(
     F: Applicative<F>
   ): <A, B>(f: (a: A) => HKTAs<F, B>, ta: Identity<A>) => HKTAs<F, Identity<B>>
-  traverse<F>(F: Applicative<F>): <A, B>(f: (a: A) => HKT<F, B>, ta: Identity<A>) => HKT<F, Identity<B>>
+  traverse<F>(F: Applicative<F>): <A, B>(f: (a: A) => HKT<F, B>, ta: HKT<URI, A>) => HKT<F, Identity<B>>
   traverse<F>(F: Applicative<F>): <A, B>(f: (a: A) => HKT<F, B>, ta: Identity<A>) => HKT<F, Identity<B>> {
     return (f, ta) => ta.traverse(F)(f)
   }

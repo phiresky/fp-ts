@@ -6,15 +6,15 @@ import { identity } from './function'
 
 export interface Foldable<F> {
   readonly URI: F
-  reduce: <A, B>(f: (b: B, a: A) => B, b: B, fa: HKT<F, A>) => B
+  reduce<A, B>(f: (b: B, a: A) => B, b: B, fa: HKT<F, A>): B
 }
 
 export interface FantasyFoldable<A> {
-  reduce: <B>(f: (b: B, a: A) => B, b: B) => B
+  reduce<B>(f: (b: B, a: A) => B, b: B): B
 }
 
 export interface FoldableComposition<F, G> {
-  reduce: <A, B>(f: (b: B, a: A) => B, b: B, fga: HKT<F, HKT<G, A>>) => B
+  reduce<A, B>(f: (b: B, a: A) => B, b: B, fga: HKT<F, HKT<G, A>>): B
 }
 
 export const getFoldableComposition = <F, G>(F: Foldable<F>, G: Foldable<G>): FoldableComposition<F, G> => {

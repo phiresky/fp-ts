@@ -4,6 +4,10 @@ import { Traversable } from './Traversable'
 import * as option from './Option'
 import { sequence } from './Traversable'
 import { constant, tuple } from './function'
+import { HKTS } from './HKT'
+import { HKTAs } from './HKT'
+import { HKT2S } from './HKT'
+import { HKT2As } from './HKT'
 
 /** This class identifies data structures which can be _unfolded_,
  * generalizing `unfoldr` on arrays.
@@ -22,11 +26,20 @@ export const replicate = <F>(unfoldable: Unfoldable<F>) => (n: number) => <A>(a:
 }
 
 /** Perform an Applicative action `n` times, and accumulate all the results. */
-export const replicateA = <F, T>(
+export function replicateA<F extends HKT2S, T>(
   applicative: Applicative<F>,
   unfoldableTraversable: Unfoldable<T> & Traversable<T>
-) => (n: number) => <A>(ma: HKT<F, A>): HKT<F, HKT<T, A>> =>
-  sequence(applicative, unfoldableTraversable)(replicate(unfoldableTraversable)(n)(ma))
+): (n: number) => <L, A>(ma: HKT2As<F, L, A>) => HKT2As<F, L, HKT<T, A>>
+export function replicateA<F extends HKTS, T>(
+  applicative: Applicative<F>,
+  unfoldableTraversable: Unfoldable<T> & Traversable<T>
+): (n: number) => <A>(ma: HKTAs<F, A>) => HKTAs<F, HKT<T, A>>
+export function replicateA<F, T>(
+  applicative: Applicative<F>,
+  unfoldableTraversable: Unfoldable<T> & Traversable<T>
+): (n: number) => <A>(ma: HKT<F, A>) => HKT<F, HKT<T, A>> {
+  return n => ma => sequence(applicative, unfoldableTraversable)(replicate(unfoldableTraversable)(n)(ma))
+}
 
 /** The container with no elements - unfolded with zero iterations. */
 export const none = <F, A>(unfoldable: Unfoldable<F>): HKT<F, A> => unfoldable.unfoldr(constant(option.none), undefined)

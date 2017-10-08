@@ -31,9 +31,6 @@ export class Const<L, A> implements FantasyFunctor<URI, A>, FantasyContravariant
   fold<B>(f: (l: L) => B): B {
     return f(this.value)
   }
-  equals(S: Setoid<L>, fy: Const<L, A>): boolean {
-    return this.fold(x => fy.fold(y => S.equals(x)(y)))
-  }
   inspect() {
     return this.toString()
   }
@@ -42,18 +39,13 @@ export class Const<L, A> implements FantasyFunctor<URI, A>, FantasyContravariant
   }
 }
 
-export const equals = <L>(S: Setoid<L>) => <A>(fx: Const<L, A>) => (fy: Const<L, A>): boolean => {
-  return fx.equals(S, fy)
-}
-
 export const getSetoid = <L, A>(S: Setoid<L>): Setoid<Const<L, A>> => ({
-  equals: x => y => equals(S)(x)(y)
+  equals: x => y => x.fold(ax => y.fold(ay => S.equals(ax)(ay)))
 })
 
 export const map = <L, A, B>(f: (a: A) => B, fa: Const<L, A>): Const<L, B> => fa.map(f)
 
-export const contramap = <L, A>(fa: Const<L, A>): (<B>(f: (b: B) => A) => Const<L, B>) => <B>(f: (b: B) => A) =>
-  fa.contramap(f)
+export const contramap = <L, A, B>(f: (b: B) => A, fa: Const<L, A>): Const<L, B> => fa.contramap(f)
 
 export const getApply = <L>(S: Semigroup<L>): Apply<URI> => ({
   URI,

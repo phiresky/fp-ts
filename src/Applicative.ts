@@ -17,30 +17,30 @@ export interface FantasyApplicative<F, A> extends FantasyApply<F, A> {}
 
 export interface ApplicativeComposition<F, G> extends FunctorComposition<F, G> {
   of: <A>(a: A) => HKT<F, HKT<G, A>>
-  ap: <A, B>(fgab: HKT<F, HKT<G, (a: A) => B>>, fga: HKT<F, HKT<G, A>>) => HKT<F, HKT<G, B>>
+  ap<A, B>(fgab: HKT<F, HKT<G, (a: A) => B>>, fga: HKT<F, HKT<G, A>>): HKT<F, HKT<G, B>>
 }
 
 export interface ApplicativeComposition11<F extends HKTS, G extends HKTS> extends FunctorComposition11<F, G> {
   of: <A>(a: A) => HKTAs<F, HKTAs<G, A>>
-  ap: <A, B>(fgab: HKTAs<F, HKTAs<G, (a: A) => B>>, fga: HKTAs<F, HKTAs<G, A>>) => HKTAs<F, HKTAs<G, B>>
+  ap<A, B>(fgab: HKTAs<F, HKTAs<G, (a: A) => B>>, fga: HKTAs<F, HKTAs<G, A>>): HKTAs<F, HKTAs<G, B>>
 }
 
 export interface ApplicativeComposition12<F extends HKTS, G extends HKT2S> extends FunctorComposition12<F, G> {
   of: <L, A>(a: A) => HKTAs<F, HKT2As<G, L, A>>
-  ap: <L, A, B>(fgab: HKTAs<F, HKT2As<G, L, (a: A) => B>>, fga: HKTAs<F, HKT2As<G, L, A>>) => HKTAs<F, HKT2As<G, L, B>>
+  ap<L, A, B>(fgab: HKTAs<F, HKT2As<G, L, (a: A) => B>>, fga: HKTAs<F, HKT2As<G, L, A>>): HKTAs<F, HKT2As<G, L, B>>
 }
 
 export interface ApplicativeComposition21<F extends HKT2S, G extends HKTS> extends FunctorComposition21<F, G> {
   of: <L, A>(a: A) => HKT2As<F, L, HKTAs<G, A>>
-  ap: <L, A, B>(fgab: HKT2As<F, L, HKTAs<G, (a: A) => B>>, fga: HKT2As<F, L, HKTAs<G, A>>) => HKT2As<F, L, HKTAs<G, B>>
+  ap<L, A, B>(fgab: HKT2As<F, L, HKTAs<G, (a: A) => B>>, fga: HKT2As<F, L, HKTAs<G, A>>): HKT2As<F, L, HKTAs<G, B>>
 }
 
 export interface ApplicativeComposition22<F extends HKT2S, G extends HKT2S> extends FunctorComposition22<F, G> {
   of: <L, M, A>(a: A) => HKT2As<F, L, HKT2As<G, M, A>>
-  ap: <L, M, A, B>(
+  ap<L, M, A, B>(
     fgab: HKT2As<F, L, HKT2As<G, M, (a: A) => B>>,
     fga: HKT2As<F, L, HKT2As<G, M, A>>
-  ) => HKT2As<F, L, HKT2As<G, M, B>>
+  ): HKT2As<F, L, HKT2As<G, M, B>>
 }
 
 export class Ops {

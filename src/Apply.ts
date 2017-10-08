@@ -3,7 +3,7 @@ import { Functor, FantasyFunctor } from './Functor'
 import { Curried2, Curried3, Curried4, identity, constant } from './function'
 
 export interface Apply<F> extends Functor<F> {
-  ap: <A, B>(fab: HKT<F, (a: A) => B>, fa: HKT<F, A>) => HKT<F, B>
+  ap<A, B>(fab: HKT<F, (a: A) => B>, fa: HKT<F, A>): HKT<F, B>
 }
 
 /*
@@ -14,7 +14,7 @@ export interface Apply<F> extends Functor<F> {
 
 */
 export interface FantasyApply<F, A> extends FantasyFunctor<F, A> {
-  ap: <B>(fab: HKT<F, (a: A) => B>) => HKT<F, B>
+  ap<B>(fab: HKT<F, (a: A) => B>): HKT<F, B>
 }
 
 export class Ops {

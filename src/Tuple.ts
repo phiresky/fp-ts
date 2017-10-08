@@ -79,14 +79,13 @@ export const fst = <L, A>(fa: Tuple<L, A>): L => fa.fst()
 /** Returns the second component of a tuple. */
 export const snd = <L, A>(fa: Tuple<L, A>): A => fa.snd()
 
-export const compose = <A, B>(bc: Tuple<A, B>) => <L>(fa: Tuple<L, A>): Tuple<L, B> => {
+export const compose = <L, A, B>(bc: Tuple<A, B>, fa: Tuple<L, A>): Tuple<L, B> => {
   return fa.compose(bc)
 }
 
 export const map = <L, A, B>(f: (b: A) => B, fa: Tuple<L, A>): Tuple<L, B> => fa.map(f)
 
-export const bimap = <L, A, M, B>(f: (l: L) => M, g: (a: A) => B): ((fla: Tuple<L, A>) => Tuple<M, B>) => fla =>
-  fla.bimap(f, g)
+export const bimap = <L, A, M, B>(f: (l: L) => M, g: (a: A) => B, fla: Tuple<L, A>): Tuple<M, B> => fla.bimap(f, g)
 
 export const extract = snd
 
@@ -183,7 +182,7 @@ export class Ops {
   traverse<F extends HKTS>(
     F: Applicative<F>
   ): <L, A, B>(f: (a: A) => HKTAs<F, B>, ta: Tuple<L, A>) => HKTAs<F, Tuple<L, B>>
-  traverse<F>(F: Applicative<F>): <L, A, B>(f: (a: A) => HKT<F, B>, ta: Tuple<L, A>) => HKT<F, Tuple<L, B>>
+  traverse<F>(F: Applicative<F>): <L, A, B>(f: (a: A) => HKT<F, B>, ta: HKT<URI, A>) => HKT<F, Tuple<L, B>>
   traverse<F>(F: Applicative<F>): <L, A, B>(f: (a: A) => HKT<F, B>, ta: Tuple<L, A>) => HKT<F, Tuple<L, B>> {
     return (f, ta) => ta.traverse(F)(f)
   }
