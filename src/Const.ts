@@ -47,23 +47,21 @@ export const map = <L, A, B>(f: (a: A) => B, fa: Const<L, A>): Const<L, B> => fa
 
 export const contramap = <L, A, B>(f: (b: B) => A, fa: Const<L, A>): Const<L, B> => fa.contramap(f)
 
+export const ap = <L>(S: Semigroup<L>) => <A, B>(fab: Const<L, (a: A) => B>, fa: Const<L, A>): Const<L, B> =>
+  new Const(S.concat(fab.fold(identity))(fa.fold(identity)))
+
 export const getApply = <L>(S: Semigroup<L>): Apply<URI> => ({
   URI,
   map,
-  ap<A, B>(fab: Const<L, (a: A) => B>, fa: Const<L, A>): Const<L, B> {
-    return new Const(S.concat(fab.fold(identity))(fa.fold(identity)))
-  }
+  ap: ap(S)
 })
 
-export const getApplicative = <L>(M: Monoid<L>): Applicative<URI> => {
-  const empty = new Const<L, any>(M.empty())
-  return {
-    ...getApply(M),
-    of<A>(b: A): Const<L, A> {
-      return empty
-    }
-  }
-}
+export const of = <L>(M: Monoid<L>) => <A>(b: A): Const<L, A> => new Const<L, any>(M.empty())
+
+export const getApplicative = <L>(M: Monoid<L>): Applicative<URI> => ({
+  ...getApply(M),
+  of: of(M)
+})
 
 export const const_: Functor<URI> & Contravariant<URI> = {
   URI,

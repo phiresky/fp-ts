@@ -74,11 +74,8 @@ export class Identity<A>
   }
 }
 
-export const equals = <A>(setoid: Setoid<A>) => (fx: Identity<A>) => (fy: Identity<A>): boolean =>
-  setoid.equals(fx.value)(fy.value)
-
 export const getSetoid = <A>(setoid: Setoid<A>): Setoid<Identity<A>> => ({
-  equals: equals(setoid)
+  equals: x => y => setoid.equals(x.value)(y.value)
 })
 
 export const map = <A, B>(f: (a: A) => B, fa: Identity<A>): Identity<B> => fa.map(f)

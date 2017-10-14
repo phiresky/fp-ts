@@ -154,22 +154,23 @@ export const map = <L, A, B>(f: (a: A) => B, fa: These<L, A>): These<L, B> => fa
 
 export const of = <L, A>(a: A): These<L, A> => new That(a)
 
-export const getMonad = <L>(SL: Semigroup<L>): Monad<URI> => {
-  const chain = <A, B>(f: (a: A) => These<L, B>, fa: These<L, A>): These<L, B> =>
-    fa.fold(
-      () => fa as any,
-      a => f(a),
-      (l1, a) => f(a).fold(l2 => this_(SL.concat(l1)(l2)), b => both(l1, b), (l2, b) => both(SL.concat(l1)(l2), b))
-    )
+export const ap = <L>(S: Semigroup<L>) => <A, B>(fab: These<L, (a: A) => B>, fa: These<L, A>) =>
+  chain(S)(f => map(f, fa), fab)
 
-  return {
-    URI,
-    map,
-    of,
-    ap: <A, B>(fab: These<L, (a: A) => B>, fa: These<L, A>) => chain(f => map(f, fa), fab),
-    chain
-  }
-}
+export const chain = <L>(S: Semigroup<L>) => <A, B>(f: (a: A) => These<L, B>, fa: These<L, A>): These<L, B> =>
+  fa.fold(
+    () => fa as any,
+    a => f(a),
+    (l1, a) => f(a).fold(l2 => this_(S.concat(l1)(l2)), b => both(l1, b), (l2, b) => both(S.concat(l1)(l2), b))
+  )
+
+export const getMonad = <L>(S: Semigroup<L>): Monad<URI> => ({
+  URI,
+  map,
+  of,
+  ap: ap(S),
+  chain: chain(S)
+})
 
 export const bimap = <L, M, A, B>(f: (l: L) => M, g: (a: A) => B, fla: These<L, A>): These<M, B> => fla.bimap(f, g)
 

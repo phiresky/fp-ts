@@ -1,13 +1,12 @@
 import { HKT, HKTS, HKT2S, HKTAs, HKT2As } from './HKT'
 import { Apply, FantasyApply } from './Apply'
-import { Kleisli } from './function'
 
 export interface Chain<F> extends Apply<F> {
-  chain<A, B>(f: Kleisli<F, A, B>, fa: HKT<F, A>): HKT<F, B>
+  chain<A, B>(f: (a: A) => HKT<F, B>, fa: HKT<F, A>): HKT<F, B>
 }
 
 export interface FantasyChain<F, A> extends FantasyApply<F, A> {
-  chain<B>(f: Kleisli<F, A, B>): HKT<F, B>
+  chain<B>(f: (a: A) => HKT<F, B>): HKT<F, B>
 }
 
 export class Ops {
