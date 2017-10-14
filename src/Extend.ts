@@ -1,4 +1,4 @@
-import { HKT, HKTS, HKT2S, HKTAs, HKT2As } from './HKT'
+import { HKT, HKTS, HKT2S, HKTAs, HKT2As, HKT3S, HKT3As } from './HKT'
 import { Functor, FantasyFunctor } from './Functor'
 
 export interface Extend<F> extends Functor<F> {
@@ -10,6 +10,9 @@ export interface FantasyExtend<F, A> extends FantasyFunctor<F, A> {
 }
 
 export class Ops {
+  duplicate<F extends HKT3S>(
+    extend: Extend<F>
+  ): <U, L, A>(ma: HKT3As<F, U, L, A>) => HKT3As<F, U, L, HKT3As<F, U, L, A>>
   duplicate<F extends HKT2S>(extend: Extend<F>): <L, A>(ma: HKT2As<F, L, A>) => HKT2As<F, L, HKT2As<F, L, A>>
   duplicate<F extends HKTS>(extend: Extend<F>): <A>(ma: HKTAs<F, A>) => HKTAs<F, HKTAs<F, A>>
   duplicate<F>(extend: Extend<F>): <A>(ma: HKT<F, A>) => HKT<F, HKT<F, A>>

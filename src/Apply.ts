@@ -1,4 +1,4 @@
-import { HKT, HKTS, HKT2S, HKTAs, HKT2As } from './HKT'
+import { HKT, HKTS, HKT2S, HKTAs, HKT2As, HKT3S, HKT3As } from './HKT'
 import { Functor, FantasyFunctor } from './Functor'
 import { Curried2, Curried3, Curried4, identity, constant } from './function'
 
@@ -19,6 +19,9 @@ export interface FantasyApply<F, A> extends FantasyFunctor<F, A> {
 
 export class Ops {
   /** Combine two effectful actions, keeping only the result of the first */
+  applyFirst<F extends HKT3S>(
+    apply: Apply<F>
+  ): <U, L, A>(fa: HKT3As<F, U, L, A>) => <B>(fb: HKT3As<F, U, L, B>) => HKT3As<F, U, L, A>
   applyFirst<F extends HKT2S>(
     apply: Apply<F>
   ): <L, A>(fa: HKT2As<F, L, A>) => <B>(fb: HKT2As<F, L, B>) => HKT2As<F, L, A>
@@ -29,6 +32,9 @@ export class Ops {
   }
 
   /** Combine two effectful actions, keeping only the result of the second */
+  applySecond<F extends HKT3S>(
+    apply: Apply<F>
+  ): <U, L, A>(fa: HKT3As<F, U, L, A>) => <B>(fb: HKT3As<F, U, L, B>) => HKT3As<F, U, L, B>
   applySecond<F extends HKT2S>(
     apply: Apply<F>
   ): <L, A>(fa: HKT2As<F, L, A>) => <B>(fb: HKT2As<F, L, B>) => HKT2As<F, L, B>
@@ -42,6 +48,9 @@ export class Ops {
    * Lift a function of two arguments to a function which accepts and returns
    * values wrapped with the type constructor `F`
    */
+  liftA2<F extends HKT3S>(
+    apply: Apply<F>
+  ): <A, B, C>(f: Curried2<A, B, C>) => <U, L>(fa: HKT3As<F, U, L, A>) => (fb: HKT3As<F, U, L, B>) => HKT3As<F, U, L, C>
   liftA2<F extends HKT2S>(
     apply: Apply<F>
   ): <A, B, C>(f: Curried2<A, B, C>) => <L>(fa: HKT2As<F, L, A>) => (fb: HKT2As<F, L, B>) => HKT2As<F, L, C>
@@ -57,6 +66,11 @@ export class Ops {
    * Lift a function of three arguments to a function which accepts and returns
    * values wrapped with the type constructor `F`
    */
+  liftA3<F extends HKT3S>(
+    apply: Apply<F>
+  ): <A, B, C, D>(
+    f: Curried3<A, B, C, D>
+  ) => <U, L>(fa: HKT3As<F, U, L, A>) => (fb: HKT3As<F, U, L, B>) => (fc: HKT3As<F, U, L, C>) => HKT3As<F, U, L, D>
   liftA3<F extends HKT2S>(
     apply: Apply<F>
   ): <A, B, C, D>(
@@ -78,6 +92,13 @@ export class Ops {
    * Lift a function of four arguments to a function which accepts and returns
    * values wrapped with the type constructor `F`
    */
+  liftA4<F extends HKT3S>(
+    apply: Apply<F>
+  ): <A, B, C, D, E>(
+    f: Curried4<A, B, C, D, E>
+  ) => <U, L>(
+    fa: HKT3As<F, U, L, A>
+  ) => (fb: HKT3As<F, U, L, B>) => (fc: HKT3As<F, U, L, C>) => (fd: HKT3As<F, U, L, D>) => HKT3As<F, U, L, E>
   liftA4<F extends HKT2S>(
     apply: Apply<F>
   ): <A, B, C, D, E>(
