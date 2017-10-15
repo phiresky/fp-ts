@@ -47,12 +47,12 @@ export class Ops {
   /** Perform a applicative action when a condition is true */
   when<F extends HKT3S>(
     F: Applicative<F>
-  ): (condition: boolean) => <U, L>(fu: HKT3As<F, U, L, void>) => HKT3As<F, U, L, void>
-  when<F extends HKT2S>(F: Applicative<F>): (condition: boolean) => <L>(fu: HKT2As<F, L, void>) => HKT2As<F, L, void>
-  when<F extends HKTS>(F: Applicative<F>): (condition: boolean) => (fu: HKTAs<F, void>) => HKTAs<F, void>
-  when<F>(F: Applicative<F>): (condition: boolean) => (fu: HKT<F, void>) => HKT<F, void>
-  when<F>(F: Applicative<F>): (condition: boolean) => (fu: HKT<F, void>) => HKT<F, void> {
-    return condition => fu => (condition ? fu : F.of(undefined))
+  ): <U, L>(condition: boolean, fu: HKT3As<F, U, L, void>) => HKT3As<F, U, L, void>
+  when<F extends HKT2S>(F: Applicative<F>): <L>(condition: boolean, fu: HKT2As<F, L, void>) => HKT2As<F, L, void>
+  when<F extends HKTS>(F: Applicative<F>): (condition: boolean, fu: HKTAs<F, void>) => HKTAs<F, void>
+  when<F>(F: Applicative<F>): (condition: boolean, fu: HKT<F, void>) => HKT<F, void>
+  when<F>(F: Applicative<F>): (condition: boolean, fu: HKT<F, void>) => HKT<F, void> {
+    return (condition, fu) => (condition ? fu : F.of(undefined))
   }
 
   getApplicativeComposition<F extends HKT2S, G extends HKT2S>(
