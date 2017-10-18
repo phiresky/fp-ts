@@ -22,6 +22,10 @@ export type URI = typeof URI
 
 export const extract = <A>(fa: Identity<A>): A => fa.extract()
 
+/**
+ * @data
+ * @constructor Identity
+ */
 export class Identity<A>
   implements FantasyMonad<URI, A>,
     FantasyFoldable<A>,

@@ -3,6 +3,7 @@ import { constant } from './function'
 
 // Adapted from https://github.com/garyb/purescript-indexed-monad
 
+/** @typeclass */
 export interface IxMonad<F> {
   readonly URI: F
   iof<I, A>(a: A): HKT3<F, I, I, A>

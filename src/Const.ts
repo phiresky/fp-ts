@@ -17,6 +17,10 @@ export const URI = 'Const'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Const
+ */
 export class Const<L, A> implements FantasyFunctor<URI, A>, FantasyContravariant<URI, A> {
   readonly _A: A
   readonly _L: L

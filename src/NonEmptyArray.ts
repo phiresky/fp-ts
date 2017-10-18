@@ -19,6 +19,10 @@ export const URI = 'NonEmptyArray'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor NonEmptyArray
+ */
 export class NonEmptyArray<A>
   implements FantasyMonad<URI, A>, FantasyComonad<URI, A>, FantasyFoldable<A>, FantasyTraversable<URI, A> {
   readonly _A: A

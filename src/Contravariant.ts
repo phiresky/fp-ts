@@ -1,5 +1,6 @@
 import { HKT, HKTS, HKT2S, HKTAs, HKT2As, HKT3S, HKT3As } from './HKT'
 
+/** @typeclass */
 export interface Contravariant<F> {
   readonly URI: F
   contramap<A, B>(f: (b: B) => A, fa: HKT<F, A>): HKT<F, B>

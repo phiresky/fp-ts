@@ -1,6 +1,7 @@
 import { HKT, HKTS, HKT2S, HKTAs, HKT2As, HKT3S, HKT3As } from './HKT'
 import { Functor, FantasyFunctor } from './Functor'
 
+/** @typeclass */
 export interface Extend<F> extends Functor<F> {
   extend<A, B>(f: (fa: HKT<F, A>) => B, ea: HKT<F, A>): HKT<F, B>
 }

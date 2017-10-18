@@ -3,6 +3,7 @@ import { Setoid, setoidBoolean, setoidNumber, setoidString } from './Setoid'
 import { Semigroup } from './Semigroup'
 import { on } from './function'
 
+/** @typeclass */
 export interface Ord<A> extends Setoid<A> {
   compare: (x: A) => (y: A) => Ordering
 }

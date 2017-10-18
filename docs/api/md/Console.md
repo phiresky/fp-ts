@@ -1,0 +1,1 @@
+MODULE [Console](https://github.com/gcanti/fp-ts/blob/master/src/Console.ts)

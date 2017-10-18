@@ -23,6 +23,12 @@ export const URI = 'These'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor This
+ * @constructor That
+ * @constructor Both
+ */
 export type These<L, A> = This<L, A> | That<L, A> | Both<L, A>
 
 export class This<L, A>

@@ -4,6 +4,7 @@ import { Applicative } from './Applicative'
 import { applyFirst } from './Apply'
 import { identity } from './function'
 
+/** @typeclass */
 export interface Foldable<F> {
   readonly URI: F
   reduce<A, B>(f: (b: B, a: A) => B, b: B, fa: HKT<F, A>): B

@@ -2,6 +2,7 @@ import { HKT, HKTS, HKT2S, HKTAs, HKT2As, HKT3S, HKT3As } from './HKT'
 import { Functor, FantasyFunctor } from './Functor'
 import { Curried2, Curried3, Curried4, identity, constant } from './function'
 
+/** @typeclass */
 export interface Apply<F> extends Functor<F> {
   ap<A, B>(fab: HKT<F, (a: A) => B>, fa: HKT<F, A>): HKT<F, B>
 }

@@ -1,0 +1,1 @@
+MODULE [Trace](https://github.com/gcanti/fp-ts/blob/master/src/Trace.ts)

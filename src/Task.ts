@@ -14,6 +14,10 @@ export const URI = 'Task'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Task
+ */
 export class Task<A> implements FantasyMonad<URI, A> {
   readonly _A: A
   readonly _URI: URI

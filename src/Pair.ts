@@ -23,6 +23,10 @@ export const URI = 'Pair'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Pair
+ */
 export class Pair<A> {
   readonly _A: A
   readonly _URI: URI

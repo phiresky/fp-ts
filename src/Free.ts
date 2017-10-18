@@ -10,6 +10,11 @@ export const URI = 'Free'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Pure
+ * @constructor Impure
+ */
 export type Free<F, A> = Pure<F, A> | Impure<F, A, any>
 
 export class Pure<F, A> implements FantasyMonad<URI, A> {

@@ -3,6 +3,7 @@ import { Chain, FantasyChain } from './Chain'
 import { Either } from './Either'
 import { isLeft } from './Either'
 
+/** @typeclass */
 export interface ChainRec<F> extends Chain<F> {
   chainRec<A, B>(f: (a: A) => HKT<F, Either<A, B>>, a: A): HKT<F, B>
 }

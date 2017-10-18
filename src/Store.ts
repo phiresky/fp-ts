@@ -13,6 +13,10 @@ export const URI = 'Store'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Store
+ */
 export class Store<S, A> implements FantasyComonad<URI, A> {
   readonly _A: A
   readonly _L: S

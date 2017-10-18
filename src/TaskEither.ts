@@ -21,6 +21,10 @@ const eitherTfold = eitherT.fold(task)
 const eitherTmapLeft = eitherT.mapLeft(task)
 const eitherTtoOption = eitherT.toOption(task)
 
+/**
+ * @data
+ * @constructor TaskEither
+ */
 export class TaskEither<L, A> implements FantasyMonad<URI, A> {
   readonly _A: A
   readonly _L: L

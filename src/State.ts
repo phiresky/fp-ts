@@ -10,6 +10,10 @@ export const URI = 'State'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor State
+ */
 export class State<S, A> implements FantasyMonad<URI, A> {
   readonly _A: A
   readonly _L: S

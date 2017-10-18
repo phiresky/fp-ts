@@ -5,6 +5,10 @@ export const URI = 'Reader'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Reader
+ */
 export class Reader<E, A> implements FantasyMonad<URI, A> {
   readonly _L: E
   readonly _A: A

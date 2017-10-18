@@ -3,6 +3,7 @@ import { Functor, FantasyFunctor, FunctorComposition, getFunctorComposition } fr
 import { Foldable, FantasyFoldable, FoldableComposition, getFoldableComposition } from './Foldable'
 import { Applicative } from './Applicative'
 
+/** @typeclass */
 export interface Traversable<T> extends Functor<T>, Foldable<T> {
   traverse: <F>(F: Applicative<F>) => <A, B>(f: (a: A) => HKT<F, B>, ta: HKT<T, A>) => HKT<F, HKT<T, B>>
 }

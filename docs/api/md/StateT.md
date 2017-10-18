@@ -1,0 +1,1 @@
+MODULE [StateT](https://github.com/gcanti/fp-ts/blob/master/src/StateT.ts)

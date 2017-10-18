@@ -7,6 +7,7 @@ import {
 } from './Semigroup'
 import { constant, Endomorphism, identity, compose } from './function'
 
+/** @typeclass */
 export interface Monoid<A> extends Semigroup<A> {
   empty: () => A
 }

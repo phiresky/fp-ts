@@ -23,6 +23,10 @@ export const URI = 'StrMap'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor StrMap
+ */
 export class StrMap<A> implements FantasyFunctor<URI, A>, FantasyFoldable<A>, FantasyTraversable<URI, A> {
   readonly _A: A
   readonly _URI: URI

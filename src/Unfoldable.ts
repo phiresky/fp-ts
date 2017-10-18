@@ -5,8 +5,9 @@ import * as option from './Option'
 import { sequence } from './Traversable'
 import { constant, tuple } from './function'
 
-/** This class identifies data structures which can be _unfolded_,
- * generalizing `unfoldr` on arrays.
+/**
+ * This class identifies data structures which can be _unfolded_, generalizing `unfoldr` on arrays.
+ * @typeclass
  */
 export interface Unfoldable<F> {
   readonly URI: F

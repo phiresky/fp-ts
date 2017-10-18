@@ -13,6 +13,10 @@ export const URI = 'Writer'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Writer
+ */
 export class Writer<W, A> implements FantasyMonad<URI, A> {
   readonly _L: W
   readonly _A: A

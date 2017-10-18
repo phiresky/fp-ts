@@ -2,7 +2,7 @@ import { Semiring, getFunctionSemiring } from './Semiring'
 
 // adapted from https://github.com/purescript/purescript-prelude/blob/master/src/Data/Ring.purs
 
-/*
+/**
  * The `Ring` class is for types that support addition, multiplication,
  * and subtraction operations.
  *
@@ -10,6 +10,7 @@ import { Semiring, getFunctionSemiring } from './Semiring'
  * laws:
  *
  * - Additive inverse: `a - a = (zero - a) + a = zero`
+ * @typeclass
  */
 export interface Ring<A> extends Semiring<A> {
   sub: (x: A) => (y: A) => A

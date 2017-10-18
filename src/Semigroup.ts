@@ -1,5 +1,6 @@
 import { Ord, min, max } from './Ord'
 
+/** @typeclass */
 export interface Semigroup<A> {
   concat: (x: A) => (y: A) => A
 }

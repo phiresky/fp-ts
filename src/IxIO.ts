@@ -13,6 +13,10 @@ export const URI = 'IxIO'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor IxIO
+ */
 export class IxIO<I, O, A> implements FantasyIxMonad<URI, A, O, I> {
   readonly _A: A
   readonly _L: O

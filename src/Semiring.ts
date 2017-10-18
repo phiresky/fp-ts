@@ -24,6 +24,7 @@ import { Function1 } from './function'
  * members of this class hierarchy due to the potential for arithmetic
  * overflows, and in the case of `Number`, the presence of `NaN` and
  * `Infinity` values. The behaviour is unspecified in these cases.
+ * @typeclass
  */
 export interface Semiring<A> {
   add: (x: A) => (y: A) => A

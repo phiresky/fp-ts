@@ -28,6 +28,10 @@ export const URI = 'Tuple'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Tuple
+ */
 export class Tuple<L, A>
   implements FantasySemigroupoid<URI, L, A>,
     FantasyBifunctor<URI, L, A>,

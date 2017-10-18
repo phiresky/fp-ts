@@ -1,0 +1,1 @@
+MODULE [Random](https://github.com/gcanti/fp-ts/blob/master/src/Random.ts)

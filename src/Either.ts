@@ -21,6 +21,11 @@ export const URI = 'Either'
 
 export type URI = typeof URI
 
+/**
+ * @data
+ * @constructor Left
+ * @constructor Right
+ */
 export type Either<L, A> = Left<L, A> | Right<L, A>
 
 export class Left<L, A>
@@ -81,10 +86,10 @@ export class Left<L, A>
   toOption(): Option<A> {
     return none
   }
-  inspect() {
+  inspect(): string {
     return this.toString()
   }
-  toString() {
+  toString(): string {
     return `left(${toString(this.value)})`
   }
 }
@@ -149,10 +154,10 @@ export class Right<L, A>
   toOption(): Option<A> {
     return some(this.value)
   }
-  inspect() {
+  inspect(): string {
     return this.toString()
   }
-  toString() {
+  toString(): string {
     return `right(${toString(this.value)})`
   }
 }

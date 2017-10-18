@@ -1,6 +1,7 @@
 import { HKT, HKT2, HKTAs, HKTS, HKT2As, HKT2S, HKT3S, HKT3As, HKT3 } from './HKT'
 import { constant } from './function'
 
+/** @typeclass */
 export interface Functor<F> {
   readonly URI: F
   map<A, B>(f: (a: A) => B, fa: HKT<F, A>): HKT<F, B>
